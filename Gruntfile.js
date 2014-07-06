@@ -26,14 +26,20 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      deploy: {
+        files: {
+          'public/dist/app.min.js': ['public/dist/app.js']
+        }
+      }
     },
 
     jshint: {
       files: [
         // Add filespec list here
+        'public/client/**/*.js'
       ],
       options: {
-        force: 'true',
+        //force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
           'public/lib/**/*.js',
@@ -111,7 +117,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
-    'concat:deploy'
+    'jshint',
+    'concat:deploy',
+    'uglify:deploy'
   ]);
 
 
